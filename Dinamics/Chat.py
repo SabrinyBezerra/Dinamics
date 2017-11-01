@@ -2,35 +2,57 @@ import sqlite3
 conn = sqlite3.connect('dinamics.db')
 cursor = conn.cursor()
 
-lista = [(1, 2, 'olá'),
-         (2, 3, 'oi')]
+class Chat():
+    def __init__(self, id_usuario, conversa):
+        self.id_usuario = id_usuario
+        self.conversa =  conversa
 
-cursor.executemany("""
-INSERT INTO TB_Chat (id, id_usuario, conversa)
-VALUES (?, ?, ?)
-""", lista)
+    def inserir(self):
+        conn = sqlite3.connect('dinamics.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+                 INSERT INTO TB_Usuario (id_usuario, conversa)
+                 VALUES (self.id_usuario, self.conversa)
+               ''')
+        conn.commit()
+        conn.close()
 
-cursor.execute("""
-SELECT * FROM TB_Chat;
-""")
+    def listar(self):
+        Chats = []
+        conn = sqlite3.connect('dinamics.db')
+        cursor = conn.cursor()
+        cursor.execute("""
+        SELECT * FROM TB_Chat;
+        """)
+        for linha in cursor.fetchall():
+            id_usuario = linha[1]
+            conversa = linha[2]
+            chat = chat(id_usuario, conversa)
+            chat.append(chat)
+        conn.close()
 
-for linha in cursor.fetchall():
-    print(linha)
+        return chat
 
-id_chat = 1
-novo_conversa = 'bom dia'
+    def deletar(self, id):
+        conn = sqlite3.connect('dinamics.db')
+        cursor = conn.cursor()
+        id = input("")
+        cursor.execute("""
+        DELETE FROM TB_Chat
+        WHERE id = ?
+        """, (id))
+        conn.commit()
+        conn.close()
 
-cursor.execute("""
-UPDATE TB_Chat
-SET conversa = ?
-WHERE id = ?
-""", (novo_conversa, id_chat))
+    def atualizar(self, id, id_usuario, conversa):
+        conn = sqlite3.connect('dinamics.db')
+        cursor = conn.cursor()
+        cursor.execute("""
+        UPDATE TB_Chat
+        SET id = ?, id_usuario = ?, conversa = ?
+        WHERE id = ?
+        """, (id, id_usuario, conversa))
+        conn.commit()
+        conn.close()
 
-cursor.execute("""
-DELETE FROM TB_Chat
-WHERE id = ?
-""", (id_chat,))
 
-conn.commit()
-
-conn.close()
