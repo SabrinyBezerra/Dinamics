@@ -1,4 +1,5 @@
 import sqlite3
+
 conn = sqlite3.connect('dinamics.db')
 cursor = conn.cursor()
 
@@ -11,10 +12,10 @@ class Feed():
     def inserir(self):
         conn = sqlite3.connect('dinamics.db')
         cursor = conn.cursor()
-        cursor.execute('''
+        cursor.execute("""
                  INSERT INTO TB_Feed (id_publicacao, publicacao)
                  VALUES (self.id_publicacao, self.publicacao)
-               ''')
+        """)
         conn.commit()
         conn.close()
 
