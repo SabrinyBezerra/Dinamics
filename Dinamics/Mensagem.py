@@ -2,35 +2,33 @@ import sqlite3
 conn = sqlite3.connect('dinamics.db')
 cursor = conn.cursor()
 
-lista = [(1, 2, ':)'),
-         (2, 3, ':(')]
+class Mensagem():
+    def __init__(self, emoji):
+        self.emoji = emoji
 
-cursor.executemany("""
-INSERT INTO TB_Mensagem (id, id_amigo, id_chat)
-VALUES (?, ?, ?)
-""", lista)
+    def inserir(self):
+        conn = sqlite3.connect('dinamics.db')
+        cursor = conn.cursor()
+        lista = [(':)'),
+                (':(')]
+        cursor.executemany("""
+        INSERT INTO TB_Mensagem (emoji)
+        VALUES (?)
+        """, lista)
+        conn.commit()
+        conn.close()
 
-cursor.execute("""
-SELECT * FROM TB_Mensagem;
-""")
+    def listar(self):
+        mensagens = []
+        conn = sqlite3.connect('dinamics.db')
+        cursor = conn.cursor()
+        cursor.execute("""
+        SELECT * FROM TB_Mensagem;
+        """)
+        for linha in cursor.fetchall():
+            emoji = linha[1]
+            mensagem = Mensagem(emoji)
+            mensagens.append(mensagem)
+        conn.close()
 
-for linha in cursor.fetchall():
-    print(linha)
-
-id_msg = 1
-novo_emoji = ':D'
-
-cursor.execute("""
-UPDATE TB_Mensagem
-SET emoji = ?
-WHERE id = ?
-""", (novo_emoji, id_msg))
-
-cursor.execute("""
-DELETE FROM TB_Mensagem
-WHERE id = ?
-""", (id_msg,))
-
-conn.commit()
-
-conn.close()
+        return mensagens
