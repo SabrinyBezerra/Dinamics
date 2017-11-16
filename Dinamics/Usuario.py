@@ -38,6 +38,8 @@ class Usuario():
             data_nasc = linha[6]
             usuario = Usuario(nome, email, senha, profissao, sexo, data_nasc)
             usuarios.append(usuario)
+            
+            
 
         conn.close()
 
