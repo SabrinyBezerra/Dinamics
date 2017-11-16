@@ -65,3 +65,17 @@ class Usuario():
         """, (email, senha, nome, profissao, sexo, data_nasc, id))
         conn.commit()
         conn.close()
+       
+    def TrocarMensagem(self):
+        conn = sqlite3.connect(':memory:')
+        cursor = conn.cursor()
+        mensagem = str(input("Digite a mensagem para ser enviada: "))
+        usuario = str(input("Digite o nome do amigo que receberá a mensagem: "))
+        cursor.execute("""
+        SELECT nome FROM TB_Usuario
+        WHERE nome=?
+        """, (usuario))
+        cursor.execute("""
+        UPDATE TB_Mensagem
+        SET mensagem=?
+        """, (mensagem))
