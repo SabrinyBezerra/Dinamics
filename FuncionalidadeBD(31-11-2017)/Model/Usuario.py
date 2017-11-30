@@ -16,13 +16,13 @@ class Usuario():
         cursor = conn.cursor()
         cursor.execute('''
           INSERT INTO TB_Usuario (nome, email, senha, profissao, sexo, data_nasc)
-          VALUES (self.nome, self.email, self.senha, self.profissao,
-           self.sexo, self.data_nasc)
-        ''')
+          VALUES (?,?,?,?,?,?)
+        ''', (self.nome, self.email, self.senha, self.profissao, self.sexo, self.data_nasc))
         conn.commit()
         conn.close()
 
-    def listar(self):
+    @staticmethod
+    def listar():
         usuarios = []
         conn = sqlite3.connect('dinamics.db')
         cursor = conn.cursor()
