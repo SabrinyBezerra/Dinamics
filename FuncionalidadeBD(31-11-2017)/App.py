@@ -1,6 +1,8 @@
 from Model.Usuario import Usuario
 import sqlite3
 
+usuario = None
+
 def cadastrarUsuario():
 
     #Solicitando os dados para cadastramento do usuario
@@ -16,7 +18,7 @@ def cadastrarUsuario():
 
     #Inserindo dados obtidos na tabela
 
-    Usuario.inserir(usuario)
+    usuario.inserir()
 
 def menu():
     escolha = int(input('''
@@ -32,6 +34,7 @@ escolha: '''))
 
 def main(args = []):
     menu()
+    Usuario.listar()
     
 if (__name__ == '__main__'):
      main()
