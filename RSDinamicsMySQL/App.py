@@ -1,6 +1,7 @@
 from model.Usuario import Usuario
 from model.RedeSocialDinamics import RedeSocialDinamics
 from database.RedeSocialDinamicsDAO import RedeSocialDinamicsDAO
+from database.UsuarioDAO import UsuarioDAO
 
 usuario = None
 
@@ -13,7 +14,18 @@ def exibirMenu():
         "     \ \ \ \ M E N U / / / /"
         " 1 - Definir nome da rede social\n"
         " 2 - Cadastrar usuario\n"
+        " 3 - Login\n"
         " 0 - Sair")
+'''
+    Login do Usuario
+'''
+def loginUSER():
+    email = input("Digite seu email: \n")
+    senha = input("Digite sua senha: \n")
+    try:
+        UsuarioDAO.LOGINDAO(email, senha)
+    except:
+        print("Usuario não tem cadastro...")
 
 '''
     Criação da Rede Social.
@@ -45,13 +57,13 @@ def criarUsuario(usuario: Usuario):
     Listar os Usuários.
 '''
 def listarUsuarios():
-    pass
+    UsuarioDAO.listarUsuario()
 
 '''
     Remover um Usuário.
 '''
 def removerUsuario(id: int):
-    pass
+    UsuarioDAO.removerAmigo(id)
 
 def main(args = []):
 
