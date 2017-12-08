@@ -8,7 +8,7 @@ class UsuarioDAO():
 
         # Script de Inserção.
         query = "INSERT INTO usuario(id_usuario, nome, nascimento, genero, email, senha) " \
-                "VALUES(%i, %s, %s, %c, %s, %S)"
+                "VALUES(%i, %s, %s, %c, %s, %s)"
         # Valores.
         values = (usuario.id_usuario, usuario.nome, usuario.nascimento, usuario.genero, usuario.email, usuario.senha)
 
