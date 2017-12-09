@@ -13,8 +13,10 @@ def exibirMenu():
         "                                    "
         "     \ \ \ \ M E N U / / / /"
         " 1 - Definir nome da rede social\n"
-        " 2 - Cadastrar usuario\n"
+        " 2 - Cadastrar Usuario\n"
         " 3 - Login\n"
+        " 4 - Listar Usuario\n"
+        " 5 - Excluir Amizade\n"
         " 0 - Sair")
 '''
     Login do Usuario
@@ -81,7 +83,16 @@ def main(args = []):
 
             elif (opcao == 2):
                 criarUsuario()
-
+                
+            elif (opcao == 3):
+                loginUSER() 
+                
+            elif (opcao == 4):     
+                listarUsuarios()
+                
+            elif (opcao == 5):
+                removerUsuario()
+                
             elif (opcao == 0):
                 continuar = False
             else:
