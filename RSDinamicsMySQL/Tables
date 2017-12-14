@@ -1,13 +1,7 @@
 import mysql.connector
 
-try:
 def main():
-    conn = mysql.connector.connect(user='root',
-                                password='ifpbinfo',
-                                host='192.168.0.104',
-                                database='Rede_Social')
-
-cursor = conn.cursor()
+try:
 
 cursor.execute("""
 CREATE TABLE TB_RedeSocial (
