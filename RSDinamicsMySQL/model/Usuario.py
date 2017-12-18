@@ -1,7 +1,7 @@
 from model.Pessoa import Pessoa
 
 class Usuario(Pessoa):
-    def __init__(self, id_usuario, nome, nascimento, genero, email, senha, profissao):
+    def __init__(self, nome, email, senha, profissao, genero, nascimento, id_usuario=None):
         super(Usuario, self).__init__(nome, genero)
         self.id_usuario = id_usuario
         self.nascimento = nascimento
