@@ -42,7 +42,7 @@ def criarRedeSocial():
 '''
     Criação do Usuário.
 '''
-def criarUsuario(usuario: Usuario):
+def criarUsuario():
 
     #Solicitando os dados para cadastramento do usuario
 
@@ -55,6 +55,7 @@ def criarUsuario(usuario: Usuario):
     data_nasc = input("Digite sua data de nascimento: ")
     usuario = Usuario(nome, email, senha, profissao, sexo, data_nasc)
 
+    return usuario
 '''
     Listar os Usuários.
 '''
@@ -71,6 +72,8 @@ def main(args = []):
 
     continuar = True
 
+    usuario = None
+
     while continuar:
         try:
             # Exibição do Menu de Opções.
@@ -82,7 +85,7 @@ def main(args = []):
                 criarRedeSocial()
 
             elif (opcao == 2):
-                criarUsuario()
+                usuario = criarUsuario()
                 
             elif (opcao == 3):
                 loginUSER() 
