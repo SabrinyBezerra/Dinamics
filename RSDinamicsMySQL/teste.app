@@ -48,7 +48,6 @@ def menuUsuario(usuario: Usuario):
                 "2) Adicionar Amigo\n" \
                 "3) Mandar mensagem\n" \
                 "4) Ver amigos\n" \
-                "5) Ver mensagens\n" \
                 "0) Sair\n\n" \
                 
             ))
@@ -70,7 +69,7 @@ def menuUsuario(usuario: Usuario):
             usuarios = UsuarioDAO().PesquisaNome(nome)
 
             if(len(usuarios) == 0):
-                print("Nenhum usuário com este nome encontrado.")
+                print("Nenhum usuário encontrado.")
                 continue
             elif(len(usuarios) == 1):
                 try:
@@ -100,7 +99,7 @@ def menuUsuario(usuario: Usuario):
             usuarios = UsuarioDAO().PesquisaNome(nome)
 
             if (len(usuarios) == 0):
-                print("Nenhum usuário com este nome encontrado.")
+                print("Nenhum usuário encontrado.")
                 continue
             elif (len(usuarios) == 1):
                 try:
@@ -140,15 +139,9 @@ def menuUsuario(usuario: Usuario):
             i = 1
             for amigo in amigos:
                 print("%s) %s" % (i, amigo.nome))
-        elif(opcao == 5):
-            mensagens = MensagemDAO().listarDeUsuario(usuario.id)
-
-            for mensagem in mensagens:
-                print("(%s) %s -> %s: %s" % (mensagem.data_envio, mensagem.remetente.nome, mensagem.destinatario.nome, mensagem.texto))
-
+       
 def main():
-    criarBanco()
     menu()
 
 if __name__ == '__main__':
-main()
+    main()
