@@ -7,6 +7,7 @@ from database.configDB import config
 class UsuarioDAO():
 
     def inserirUsuario(usuario: Usuario):
+       
         try:
             # Conexão com a base de dados.
             conn = mysql.connector.connect(**config)  # Nome do BD.
@@ -94,3 +95,67 @@ class UsuarioDAO():
         finally:
             cursor.close()
             conn.close()
+       
+    def PesquisaNome(self, nome):
+        query = "SELECT * FROM tb_usuario " \
+                "WHERE nome like %s"
+        values = (nome,)
+
+        usuarios = []
+
+        try:
+            conn = mysql.connector.connect(**config)
+
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(query, values)
+
+            for row in cursor.fetchall():
+                id = row['id']
+                nome = row['nome']
+                email = row['email']
+                senha = row['senha']
+                sexo = row['sexo']
+                cidade = row['cidade']
+                data_nascimento = row['data_nascimento']
+
+                usuario = Usuario(nome, email, senha, sexo, cidade, data_nascimento, id)
+                usuarios.append(usuario)
+
+        except mysql.connector.Error as error:
+            print(error)
+        finally:
+            cursor.close()
+            conn.close()
+
+return usuarios
+
+    def PesquisaID(self, id):
+        query = "SELECT * FROM tb_usuario " \
+                "WHERE id = %s"
+        values = (id,)
+
+        try:
+            conn = mysql.connector.connect(**config)
+
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(query, values)
+
+            row = cursor.fetchone()
+
+            id = row['id']
+            nome = row['nome']
+            email = row['email']
+            senha = row['senha']
+            sexo = row['sexo']
+            cidade = row['cidade']
+            data_nascimento = row['data_nascimento']
+
+            usuario = Usuario(nome, email, senha, sexo, cidade, data_nascimento, id)
+
+        except mysql.connector.Error as error:
+            print(error)
+        finally:
+            cursor.close()
+            conn.close()
+
+return usuario
