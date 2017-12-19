@@ -127,7 +127,7 @@ class UsuarioDAO():
             cursor.close()
             conn.close()
 
-return usuarios
+        return usuarios
 
     def PesquisaID(self, id):
         query = "SELECT * FROM tb_usuario " \
@@ -158,4 +158,39 @@ return usuarios
             cursor.close()
             conn.close()
 
-return usuario
+        return usuario
+
+
+    def listarAmigos(self, id):
+        query = "SELECT distinct * FROM tb_usuario " \
+                "JOIN tb_amigo ON usuario1_id = %s or usuario2_id = %s " \
+                "WHERE id != %s"
+        values = (id, id, id)
+
+        usuarios = []
+
+        try:
+            conn = mysql.connector.connect(**config)
+
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(query, values)
+
+            for row in cursor.fetchall():
+                id = row['id']
+                nome = row['nome']
+                email = row['email']
+                senha = row['senha']
+                sexo = row['sexo']
+                cidade = row['cidade']
+                data_nascimento = row['data_nascimento']
+
+                usuario = Usuario(nome, email, senha, sexo, cidade, data_nascimento, id)
+                usuarios.append(usuario)
+
+        except mysql.connector.Error as error:
+            print(error)
+        finally:
+            cursor.close()
+            conn.close()
+
+        return usuarios
