@@ -1,7 +1,9 @@
 import mysql.connector
 from model.RedeSocialDinamics import RedeSocialDinamics
 from database.configDB import config
-
+'''
+Criação da classe DAO da rede social DINAMICS
+'''
 class RedeSocialDinamicsDAO():
 
     def inserirRedeSocial(redeSocial: RedeSocialDinamics):
