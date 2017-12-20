@@ -2,8 +2,10 @@ from model.Mensagem import Mensagem
 from database.configDB import config
 import mysql.connector
 
+'''
+Classe DAO de MENSAGEM e funções de inserirMensagem e listar
+'''
 class MensagemDAO():
-
     def inserirMensagem(self, mensagem: Mensagem):
         try:
             conn = mysql.connector.connect(**config)
